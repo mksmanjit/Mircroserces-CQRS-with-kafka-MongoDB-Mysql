@@ -1,0 +1,18 @@
+bank-account/account.cmd/.mvn/wrapper/maven-wrapper.jar
+bank-account/account.cmd/.mvn/wrapper/maven-wrapper.properties
+bank-account/account.cmd/mvnw
+bank-account/account.cmd/mvnw.cmd
+bank-account/account.common/.mvn/wrapper/maven-wrapper.jar
+bank-account/account.common/.mvn/wrapper/maven-wrapper.properties
+bank-account/account.common/mvnw
+bank-account/account.common/mvnw.cmd
+ bank-account/account.query/.mvn/wrapper/maven-wrapper.jar
+bank-account/account.query/.mvn/wrapper/maven-wrapper.properties
+bank-account/account.query/mvnw
+bank-account/account.query/mvnw.cmd
+cqrs/cqrs.core/.mvn/wrapper/maven-wrapper.jar
+cqrs/cqrs.core/.mvn/wrapper/maven-wrapper.properties
+cqrs/cqrs.core/mvnw
+cqrs/cqrs.core/mvnw.cmd
+
+
