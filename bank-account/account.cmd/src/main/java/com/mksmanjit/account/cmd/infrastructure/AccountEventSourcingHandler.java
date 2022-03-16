@@ -2,9 +2,9 @@ package com.mksmanjit.account.cmd.infrastructure;
 
 import com.mksmanjit.account.cmd.domain.AccountAggregate;
 import com.mksmanjit.cqrs.core.domain.AggregateRoot;
-import com.mksmanjit.cqrs.core.events.BaseEvent;
 import com.mksmanjit.cqrs.core.handlers.EventSourcingHandler;
 import com.mksmanjit.cqrs.core.infrastructure.EventStore;
+import com.mksmanjit.cqrs.core.producers.EventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,9 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
 
     @Autowired
     private EventStore eventStore;
+
+    @Autowired
+    private EventProducer eventProducer;
 
     @Override
     public void save(AggregateRoot aggregateRoot) {
@@ -32,5 +35,18 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
             aggregate.setVersion(latestVersion.get());
         }
         return aggregate;
+    }
+
+    @Override
+    public void republishEvents() {
+        var aggregateIds = eventStore.getAggregateIds();
+        for(String id : aggregateIds) {
+            var aggregate = getById(id);
+            if(aggregate == null || !aggregate.isActive()) continue;
+            var events = eventStore.getEvents(id);
+            for(var event: events) {
+                eventProducer.produce(event.getClass().getSimpleName(), event);
+            }
+        }
     }
 }

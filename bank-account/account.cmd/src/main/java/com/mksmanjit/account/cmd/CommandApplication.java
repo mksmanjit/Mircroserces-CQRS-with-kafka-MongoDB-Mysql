@@ -27,6 +27,7 @@ public class CommandApplication {
 		commandDispatcher.registerHandler(DepositFundCommand.class, commandHandler::handle);
 		commandDispatcher.registerHandler(WithdrawFundCommand.class, commandHandler::handle);
 		commandDispatcher.registerHandler(CloseAccountCommand.class, commandHandler::handle);
+		commandDispatcher.registerHandler(RestoreReadDbCommand.class, commandHandler::handle);
 	}
 
 }
